@@ -71,8 +71,16 @@
                     </div>
                 </div>
             </div>
-            <div class="buttonsCard">
-                <a class="buttonVai" href="http://">Vai alla carta</a>
+            <div class="buttons">
+                <div class="buttonsCard">
+                    <a class="buttonVai" href="">Vai alla carta</a>
+                </div>
+                <div class="buttonsCard">
+                    <a class="buttonElimina" href="">Elimina Carta</a>
+                </div>
+            </div>
+            <div class="cardNew">
+                <button class="buttonNew">+</button>
             </div>
         </div>
     </section>
