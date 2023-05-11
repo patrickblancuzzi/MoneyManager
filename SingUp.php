@@ -12,18 +12,59 @@
     <main data-barba="container" data-barba-namespace="SingUp">
         <section class="sectionSingUp">  
             <div class="formContainer">
-                <form action="" method="post" class="loginForm"> 
+                <form action="Convalidation/convalidateRegister.php" method="post" class="loginForm"> 
                     <h2>Registrati</h2> 
                     <label for="name">Username:</label> 
                     <input type="text" id="username" name="username" required> 
+
+                    <?php
+                        if(isset($_GET["error"])){
+                            if($_GET["error"] == 3){
+                                echo "<p class='error'>Username già in uso</p>";
+
+                                echo  "<script>
+                                        document.getElementById('username').style.border = '1px solid red';
+                                    </script>";
+                            }
+                        }
+                    ?>
+
                     <label for="age">Età</label>
-                    <input type="number" id="age" name="age" required>
+                    <input type="number" id="age" name="age" required min="0">
+
+                    <?php
+                        if(isset($_GET["error"])){
+                            if($_GET["error"] == 1){
+                                echo "<p class='error'>Devi avere almeno 18 anni per registrarti</p>";
+
+                                echo  "<script>
+                                        document.getElementById('age').style.border = '1px solid red';
+                                    </script>";
+                            }
+                        }
+                    ?>
+                    <label for="email">Email:</label> 
+                    <input type="email" id="email" name="email" required> 
                     <label for="password">Password:</label> 
                     <input type="password" id="password" name="password" required> 
                     <label for="passwordConferma">Conferma Password:</label> 
                     <input type="password" id="passwordConferma" name="passwordConferma" required> 
-                    <input type="submit" value="Registrati"> 
-                    <a href="./login.php" class="linkReg"> Login</a>
+
+                    <?php
+                        if(isset($_GET["error"])){
+                            if($_GET["error"] == 2){
+                                echo "<p class='error'>Le password non coincidono</p>";
+
+                                echo  "<script>
+                                        document.getElementById('password').style.border = '1px solid red';
+                                        document.getElementById('passwordConferma').style.border = '1px solid red';
+                                    </script>";
+                            }
+                        }
+                    ?>
+
+                    <input type="submit" value="Registrati">
+                    <a href="./Login.php" class="linkReg"> Login</a>
                 </form> 
             </div>
             <div class="decorationDiv"></div>
@@ -32,7 +73,6 @@
             <div class="secondIntDecorationDiv"></div>
         </section> 
     </main>
-
     <script type="module" src="./scripts/singUpAnimation.js"></script>
 </body>
 </html>
