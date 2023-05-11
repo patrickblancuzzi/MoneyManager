@@ -168,16 +168,15 @@ nav .icon-burger .line {
 
 .cardNew{
 	margin-top: 2vh;
-	width: 320px;
-	height: 190px;
+	padding-top: 80px;
+    padding-left: 140px;
+    padding-right: 140px;
+    padding-bottom: 80px;
 	-webkit-perspective: 600px;
 	-moz-perspective: 600px;
 	perspective:600px;
 	border: 1px solid black!important;
 	border-radius: 8px;
-	display: flex;
-	justify-content: center;
-	align-items: center;
 	background-color: rgb(239,239,239);
 }
 
@@ -205,7 +204,7 @@ nav .icon-burger .line {
 	display: inline-block;
     width: 320px;
     height: 190px;
-    background-image: url('https://image.ibb.co/bVnMrc/g3095.png'), linear-gradient(to left, blue, rgb(151, 151, 244)); /*linear-gradient(to right bottom, #fd8369, #fc7870, #f96e78, #f56581, #ee5d8a)*/
+    background-image: linear-gradient(to left, blue, rgb(151, 151, 244)); /*linear-gradient(to right bottom, #fd8369, #fc7870, #f96e78, #f56581, #ee5d8a)*/
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
@@ -425,8 +424,21 @@ nav .icon-burger .line {
 
 .buttonNew{
 	border: 0;
-	width: 40px;
-	height: 40px;
 	border-radius: 50%;
 	font-size: 30px;
+	transition: 1s;
+}
+
+.buttonNew:hover{
+	transform: scale(1.5);
+}
+
+.displayNone{
+	display:none;
+}
+
+.formContent{
+	text-align: center;
+	display: flex;
+	flex-direction: column;
 }

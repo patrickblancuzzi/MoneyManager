@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Panoramica - Money Manager</title>
     <link rel="stylesheet" href="./styles/panoramica.css">
+    <link rel="icon" type="image/x-icon" href="./imgs/svg/logo-no-background.svg">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">    
 </head>
 <body>
@@ -80,9 +81,34 @@
                 </div>
             </div>
             <div class="cardNew">
-                <button class="buttonNew">+</button>
+                <button class="buttonNew" id="buttonNew" onclick="cambioContent()">+</button>
+                
+                <div class="displayNone" id="formDivContent">
+                    <form class="formContent" action="">
+                    <label for="nomeTitolare">Nome titolare:</label>
+                        <input type="text" name="nomeTitolare" id="nomeTitolare">
+                        <label for="pan">Pan:</label>
+                        <input type="text" name="pan" id="pan">
+                        <label for="dataScadenza">Data di Scadenza:</label>
+                        <input type="date" name="dataScadenza" id="dataScadenza">
+                        <label for="cvv">CVV:</label>
+                        <input type="text" name="cvv" id="cvv">
+                    </form>
+                </div>
             </div>
         </div>
     </section>
+
+    <script>
+        let button = document.getElementById("buttonNew");
+        let form = document.getElementById("formDivContent");
+
+        function cambioContent(){
+            form.classList.remove("displayNone");
+            console.log("ciao");
+            button.classList.add("displayNone");
+        }
+
+    </script>
 </body>
 </html>
