@@ -93,6 +93,7 @@
                         <input type="date" name="dataScadenza" id="dataScadenza">
                         <label for="cvv">CVV:</label>
                         <input type="text" name="cvv" id="cvv">
+                        <button type="submit" class="buttonVai">Crea</button>
                     </form>
                 </div>
             </div>
