@@ -12,12 +12,26 @@
     <main data-barba="container" data-barba-namespace="login">
         <section class="sectionSingUp">  
             <div class="formContainer">
-                <form action="" method="post" class="loginForm"> 
+                <form action="Convalidation/convalidateLogin.php" method="post" class="loginForm"> 
                     <h2>Login</h2> 
                     <label for="username">Username:</label> 
                     <input type="text" id="username" name="username" required> 
                     <label for="password">Password:</label> 
                     <input type="password" id="password" name="password" required> 
+
+                    <?php
+                        if(isset($_GET["error"])){
+                            if($_GET["error"] == 1){
+                                echo "<p class='error'>Username o password errati</p>";
+
+                                echo  "<script>
+                                        document.getElementById('username').style.border = '1px solid red';
+                                        document.getElementById('password').style.border = '1px solid red';
+                                    </script>";
+                            }
+                        }
+                    ?>
+
                     <input type="submit" value="Accedi"> 
                     <a href="./SingUp.php" class="linkReg"> Non hai un account? Registrati!</a>
                 </form> 
