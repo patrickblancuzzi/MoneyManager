@@ -1,3 +1,10 @@
+<?php
+    session_start();
+    if(!isset($_SESSION["username"])){
+        header("Location: ./Login.php");
+    }
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -48,38 +55,56 @@
     </nav>
 
     <section class="relativeSection">
-        <div class="containerCards">
-            <div class="card">
-                <div class="card__front card__part">
-                    <img class="card__front-square card__square" src="../imgs/png/PayPal-Logo.png">
-                    <p class="card_numer">**** **** **** 6258</p>
-                    <div class="card__space-75">
-                    <span class="card__label">Titolare:</span>
-                    <p class="card__info">Filippo Lenisa</p>
+        
+        <?php
+            include "dbConnection.php";
+
+            $username = mysqli_real_escape_string($conn, $_SESSION["username"]);
+            $query = "SELECT * FROM Carta WHERE User = '$username'";            
+
+            $result = mysqli_query($conn, $query);
+
+            echo "<div class='containerCards'>";
+            if(mysqli_num_rows($result) > 0){
+                while($row = mysqli_fetch_assoc($result)){
+                    echo "
+                    <div class='containerCards'>
+                        <div class='card'>
+                            <div class='card__front card__part'>
+                                <img class='card__front-square card__square' src='../imgs/png/PayPal-Logo.png'>
+                                <p class='card_numer'>" . chunk_split($row["PAN"], 4, " ") . "</p>
+                                <div class='card__space-75'>
+                                <span class='card__label'>Titolare:</span>
+                                <p class='card__info'>" . $row["Titolare"] . "</p>
+                                </div>
+                                <div class='card__space-25'>
+                                <span class='card__label'>Scadenza</span>
+                                        <p class='card__info'>" . $row["DataScadenza"] . "</p>
+                                </div>
+                            </div>             
+                            <div class='card__back card__part'>
+                                <div class='card__black-line'></div>
+                                <div class='card__back-content'>
+                                <div class='card__secret'>
+                                    <p class='card__secret--last'>" . $row["CVV"] . "</p>
+                                </div>
+                                <img class='card__back-square card__square' src='../imgs/png/PayPal-Logo.png'>
+                                </div>
+                            </div>
+                        </div>
+                        <div class='buttons'>
+                            <div class='buttonsCard'>
+                                <a class='buttonVai' href=''>Vai alla carta</a>
+                            </div>
+                            <div class='buttonsCard'>
+                                <a class='buttonElimina' href=''>Elimina Carta</a>
+                            </div>
                     </div>
-                    <div class="card__space-25">
-                    <span class="card__label">Scadenza</span>
-                            <p class="card__info">10/25</p>
-                    </div>
-                </div>             
-                <div class="card__back card__part">
-                    <div class="card__black-line"></div>
-                    <div class="card__back-content">
-                    <div class="card__secret">
-                        <p class="card__secret--last">420</p>
-                    </div>
-                    <img class="card__back-square card__square" src="../imgs/png/PayPal-Logo.png">
-                    </div>
-                </div>
-            </div>
-            <div class="buttons">
-                <div class="buttonsCard">
-                    <a class="buttonVai" href="">Vai alla carta</a>
-                </div>
-                <div class="buttonsCard">
-                    <a class="buttonElimina" href="">Elimina Carta</a>
-                </div>
-            </div>
+                ";
+                }
+            }
+        ?>
+
             <div class="cardNew">
                 <button class="buttonNew" id="buttonNew" onclick="cambioContent()">+</button>
                 
@@ -99,6 +124,12 @@
             </div>
         </div>
     </section>
+
+
+    <!-- Solo per la fase di test -->
+        <form action="logout.php" method="post">
+            <input type="submit" value="Logout">
+        </form>
 
     <script>
         let button = document.getElementById("buttonNew");
