@@ -139,3 +139,10 @@ input[type="submit"]:hover{
     bottom: -50%;
     z-index: -3;
 }
+
+.error {
+    color: red;
+    font-size: 0.8rem;
+    margin-bottom: 0.9rem;
+    text-align: center;
+}
