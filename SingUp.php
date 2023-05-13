@@ -60,6 +60,15 @@
                                         document.getElementById('passwordConferma').style.border = '1px solid red';
                                     </script>";
                             }
+
+                            if($_GET["error"] == 4){
+                                echo "<p class='error'>La password deve contenere almeno 8 caratteri</p>";
+
+                                echo  "<script>
+                                        document.getElementById('password').style.border = '1px solid red';
+                                        document.getElementById('passwordConferma').style.border = '1px solid red';
+                                    </script>";
+                            }
                         }
                     ?>
 
