@@ -7,10 +7,16 @@
 
     $age = intval($age);
 
+    echo "<script> console.log('$usernameForm') </script>";
+
     if($age < 18){
         header("Location: ../SingUp.php?error=1");
     }
     
+    if(strlen($passwordForm) < 8){
+        header("Location: ../SingUp.php?error=4");
+    }
+
     if($passwordForm != $passwordConferma){
         header("Location: ../SingUp.php?error=2");
     }
@@ -37,4 +43,6 @@
     $result = $conn->query($sql);
 
     $conn->close();
+
+    header("Location: ../Login.php");
 ?>
