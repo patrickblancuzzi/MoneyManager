@@ -26,12 +26,20 @@
 
         include "../dbConnection.php";
 
+        $usernameForm = mysqli_real_escape_string($conn, $usernameForm);
+        $passwordForm = mysqli_real_escape_string($conn, $passwordForm);
+
         $sql = "SELECT * FROM Utente WHERE Username = '$usernameForm'";
 
         $result = $conn->query($sql);
 
         if($result->num_rows > 0){
             $row = $result->fetch_assoc();
+
+            if($row["FlagVerifica"] == 1){
+                header("Location: ../Login.php?error=3");
+                exit();
+            }
 
             $password = $row["Password"];
 
@@ -41,14 +49,18 @@
                 $_SESSION["username"] = $usernameForm;
 
                 header("Location: ../index.php");
+                exit();
             }else{
                 header("Location: ../Login.php?error=1");
+                exit();
             }
         }
         else{
             header("Location: ../Login.php?error=1");
+            exit();
        }
     } else {
         header("Location: ../Login.php?error=2");
+        exit();
     }
 ?>
