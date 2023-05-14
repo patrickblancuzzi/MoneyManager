@@ -6,13 +6,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="image/x-icon" href="./imgs/svg/logo-no-background.svg">
     <link rel="stylesheet" href="./styles/styleSingUp.css">
+    <script src="https://www.google.com/recaptcha/api.js"></script>
     <title>SingUp - Money Manager</title>
 </head>
 <body data-barba="wrapper"> 
     <main data-barba="container" data-barba-namespace="SingUp">
         <section class="sectionSingUp">  
             <div class="formContainer">
-                <form action="Convalidation/convalidateRegister.php" method="post" class="loginForm"> 
+                <?php
+                    require_once __DIR__ . '/Convalidation/Config.php';
+                ?>
+                <form action="Convalidation/convalidateRegister.php" method="post" class="loginForm" id="frm"> 
                     <h2>Registrati</h2> 
                     <label for="name">Username:</label> 
                     <input type="text" id="username" name="username" required> 
@@ -69,10 +73,21 @@
                                         document.getElementById('passwordConferma').style.border = '1px solid red';
                                     </script>";
                             }
+                            if($_GET["error"] == 5){
+                                echo "<p class='error'>Captcha non superato, aggiorna la pagina</p>";
+                            }
                         }
                     ?>
 
-                    <input type="submit" value="Registrati">
+                    <div class="row">
+                    <input type="submit" class="g-recaptcha full-width"
+                        data-sitekey="<?php echo Config::GOOGLE_RECAPTCHA_SITE_KEY; ?>"
+                        data-callback='onSubmit' data-action='submit'
+                        value="Accedi" 
+                        id="btninp"
+                        style="">
+                    </div>
+                    <!-- <input type="submit" value="Registrati"> -->
                     <a href="./Login.php" class="linkReg"> Login</a>
                 </form> 
             </div>
@@ -83,5 +98,36 @@
         </section> 
     </main>
     <script type="module" src="./scripts/singUpAnimation.js"></script>
+
+        <script>
+        function onSubmit(token) {
+            var button = document.createElement('input');
+            button.type = 'hidden';
+            button.name = 'recaptcha_token';
+            button.value = token;
+
+            var form = document.getElementById("frm");
+            form.appendChild(button);
+            form.submit();
+        }
+
+        var inputBox = document.getElementById("age");
+
+        var invalidChars = [
+        "-",
+        "+",
+        "e",
+        ];
+
+        inputBox.addEventListener("input", function() {
+        this.value = this.value.replace(/[e\+\-]/gi, "");
+        });
+
+        inputBox.addEventListener("keydown", function(e) {
+        if (invalidChars.includes(e.key)) {
+            e.preventDefault();
+        }
+        });
+    </script>
 </body>
 </html>
