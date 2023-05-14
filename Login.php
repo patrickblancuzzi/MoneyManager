@@ -36,6 +36,12 @@
                             else if($_GET["error"] == 2){
                                 echo "<p class='error'>Captcha non superato, aggiorna la pagina</p>";
                             }
+                            else if($_GET["error"] == 3){
+                                echo "<p class='error'>Account non verificato, controlla la tua mail</p>";
+                            }
+                            else if($_GET["error"] == 4){
+                                echo "<p class='notError'>Account autenticato correttamente!</p>";
+                            }
                         }
                     ?>
 
