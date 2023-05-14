@@ -7,7 +7,7 @@
     <link rel="icon" type="image/x-icon" href="./imgs/svg/logo-no-background.svg">
     <link rel="stylesheet" href="./styles/styleLogin.css">
     <script src="https://www.google.com/recaptcha/api.js"></script>
-    <title>Login</title>
+    <title>Login - Money Manager</title>
 </head>
 <body data-barba="wrapper">
     <main data-barba="container" data-barba-namespace="login">
@@ -34,7 +34,7 @@
                                     </script>";
                             }
                             else if($_GET["error"] == 2){
-                                echo "<p class='error'>Captcha non superato</p>";
+                                echo "<p class='error'>Captcha non superato, aggiorna la pagina</p>";
                             }
                         }
                     ?>
@@ -61,7 +61,6 @@
     <script type="module" src="./scripts/main.js"></script>
 
     <script>
-// JavaScript
         function onSubmit(token) {
             var button = document.createElement('input');
             button.type = 'hidden';
