@@ -83,7 +83,7 @@
                     <input type="submit" class="g-recaptcha full-width"
                         data-sitekey="<?php echo Config::GOOGLE_RECAPTCHA_SITE_KEY; ?>"
                         data-callback='onSubmit' data-action='submit'
-                        value="Accedi" 
+                        value="Registrati" 
                         id="btninp"
                         style="">
                     </div>
