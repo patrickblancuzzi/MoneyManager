@@ -1,30 +1,54 @@
 <?php
-    $usernameForm = $_POST["username"];
-    $passwordForm = $_POST["password"];
+    require_once 'Config.php';
 
-    include "../dbConnection.php";
+    $reCaptchaToken = $_POST['recaptcha_token'];
 
-    $sql = "SELECT * FROM Utente WHERE Username = '$usernameForm'";
+    $postArray = array(
+        'secret' => Config::GOOGLE_RECAPTCHA_SECRET_KEY,
+        'response' => $reCaptchaToken
+    );
 
-    $result = $conn->query($sql);
+    $postJSON = http_build_query($postArray);
 
-    if($result->num_rows > 0){
-        $row = $result->fetch_assoc();
+    $curl = curl_init();
+    curl_setopt($curl, CURLOPT_URL, "https://www.google.com/recaptcha/api/siteverify");
+    curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+    curl_setopt($curl, CURLOPT_POST, 1);
+    curl_setopt($curl, CURLOPT_POSTFIELDS, $postJSON);
+    $response = curl_exec($curl);
+    curl_close($curl);
 
-        $password = $row["Password"];
+    $curlResponseArray = json_decode($response, true);
 
-        if(password_verify($passwordForm, $password)){
-            session_start();
+    if ($curlResponseArray["success"] == true && $curlResponseArray["score"] >= 0.5) {
+        $usernameForm = $_POST["username"];
+        $passwordForm = $_POST["password"];
 
-            $_SESSION["username"] = $usernameForm;
+        include "../dbConnection.php";
 
-            header("Location: ../index.php");
-        }else{
-            header("Location: ../Login.php?error=1");
+        $sql = "SELECT * FROM Utente WHERE Username = '$usernameForm'";
+
+        $result = $conn->query($sql);
+
+        if($result->num_rows > 0){
+            $row = $result->fetch_assoc();
+
+            $password = $row["Password"];
+
+            if(password_verify($passwordForm, $password)){
+                session_start();
+
+                $_SESSION["username"] = $usernameForm;
+
+                header("Location: ../index.php");
+            }else{
+                header("Location: ../Login.php?error=1");
+            }
         }
+        else{
+            header("Location: ../Login.php?error=1");
+       }
+    } else {
+        header("Location: ../Login.php?error=2");
     }
-    else{
-        header("Location: ../Login.php?error=1");
-    }
-
 ?>
