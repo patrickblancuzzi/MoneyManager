@@ -11,7 +11,7 @@ nav {
 	padding: 0 5%;
 	height: 15vh;
 	text-transform: uppercase;
-    background-color: #2cb22c;
+    background-color: rgb(37, 141, 37);
 	box-shadow: 0px 5px 10px 0px #aaa;
 }
 
@@ -87,13 +87,13 @@ nav .icon-burger .line {
 		width: auto;
 		height: auto;
 		flex-direction: column;
-		background: #2cb22c;
+		background-color: rgb(37, 141, 37);
 		overflow: hidden;
 		transition: all .5s ease-in-out;
 	}
 
 	nav{
-		background: #2cb22c;
+		background-color: rgb(37, 141, 37);
 	}
 	nav .links a {
 		font-size: 20px;
@@ -167,6 +167,11 @@ nav .icon-burger .line {
 }
 
 .cardNew{
+	position: relative;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	cursor: pointer;
 	margin-top: 2vh;
 	padding-top: 80px;
     padding-left: 140px;
@@ -177,8 +182,21 @@ nav .icon-burger .line {
 	perspective:600px;
 	border: 1px solid black!important;
 	border-radius: 8px;
-	background-color: rgb(239,239,239);
+	background-color: rgb(236, 234, 234);
 }
+
+/* .cardNew::before{
+	position: absolute;
+	content: "+";
+	font-size: 2.5rem;
+	z-index: 1;
+	transform-origin: center;
+} */
+
+/* .cardNew:hover::before{
+	transform: rotate(90deg);
+	transition: .5s;
+} */
 
 .buttons{
 	margin-top: 1vh;
@@ -360,37 +378,6 @@ nav .icon-burger .line {
 	text-decoration: none;
 }
 
-/* CSS */
-.buttonVai {
-  margin: 10px;
-  padding: 15px 30px;
-  text-align: center;
-  text-transform: uppercase;
-  transition: 0.5s;
-  background-size: 200% auto;
-  color: white;
-  border-radius: 10px;
-  display: block;
-  border: 0px;
-  font-weight: 700;
-  box-shadow: 0px 0px 14px -7px green;
-  background-image: linear-gradient(45deg, green 0%, rgb(1, 195, 1)  51%, rgb(29, 110, 29)  100%);
-  cursor: pointer;
-  user-select: none;
-  -webkit-user-select: none;
-  touch-action: manipulation;
-}
-
-.buttonVai:hover {
-  background-position: right center;
-  color: #fff;
-  text-decoration: none;
-}
-
-.buttonVai:active {
-  transform: scale(0.95);
-}
-
 .buttonElimina {
   text-decoration: none;
   margin: 10px;
@@ -426,15 +413,21 @@ nav .icon-burger .line {
 	border: 0;
 	border-radius: 50%;
 	font-size: 30px;
-	transition: 1s;
+	background-color: rgb(236, 234, 234);
+	transform-origin: center;
 }
 
 .buttonNew:hover{
-	transform: scale(1.5);
+	transform: rotate(90deg);
+}
+
+.transition{
+	transition: 1s;
 }
 
 .displayNone{
 	display:none;
+	transition: 1s;
 }
 
 .formContent{
@@ -442,3 +435,82 @@ nav .icon-burger .line {
 	display: flex;
 	flex-direction: column;
 }
+
+.pCardNew{
+	padding: 0; 
+	margin: 0;
+	font-size: 2rem;
+}
+
+.buttonBack{
+  margin-top: 5%;
+  background: #FF4742;
+  border: 1px solid #FF4742;
+  border-radius: 6px;
+  box-shadow: rgba(0, 0, 0, 0.1) 1px 2px 4px;
+  box-sizing: border-box;
+  color: #FFFFFF;
+  cursor: pointer;
+  display: inline-block;
+  font-family: nunito,roboto,proxima-nova,"proxima nova",sans-serif;
+  font-size: 16px;
+  font-weight: 800;
+  line-height: 16px;
+  min-height: 40px;
+  outline: 0;
+  padding: 12px 14px;
+  text-align: center;
+  text-rendering: geometricprecision;
+  text-transform: none;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  vertical-align: middle;
+}
+
+.buttonBack:hover,
+.buttonBack:active{
+  background-color: initial;
+  background-position: 0 0;
+  color: #FF4742;
+}
+
+.buttonBack:active{
+  opacity: .5;
+}
+
+.buttonVai{
+	background: rgb(37, 141, 37);
+	border: 1px solid rgb(37, 141, 37);
+	border-radius: 6px;
+	box-shadow: rgba(0, 0, 0, 0.1) 1px 2px 4px;
+	box-sizing: border-box;
+	color: #FFFFFF;
+	cursor: pointer;
+	display: inline-block;
+	font-family: nunito,roboto,proxima-nova,"proxima nova",sans-serif;
+	font-size: 16px;
+	font-weight: 800;
+	line-height: 16px;
+	min-height: 40px;
+	outline: 0;
+	padding: 12px 14px;
+	text-align: center;
+	text-rendering: geometricprecision;
+	text-transform: none;
+	user-select: none;
+	-webkit-user-select: none;
+	touch-action: manipulation;
+	vertical-align: middle;
+  }
+  
+  .buttonVai:hover,
+  .buttonVai:active{
+	background-color: initial;
+	background-position: 0 0;
+	color: rgb(37, 141, 37);
+  }
+  
+  .buttonVai:active{
+	opacity: .5;
+  }
