@@ -1,3 +1,11 @@
+<?php
+    session_start();
+
+    if(!isset($_SESSION['username'])){
+        header("Location: Login.php");
+    }
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -48,15 +56,15 @@
     </nav>
     <section class="relativeSection">
         <div class="contentForm">
-            <form class="formWish" action="">
+            <form class="formWish" action="aggiungiProdotto.php" method="post">
                 <h2>Aggiungi prodotto:</h2>
                 <div class="content">
                     <label for="name"></label>
-                    <input type="text" name="name" id="name" placeholder="Nome">
+                    <input type="text" name="name" id="name" placeholder="Nome" required>
                     <label for="categoria"></label>
-                    <input type="text" name="categoria" id="categoria" placeholder="Categoria">
+                    <input type="text" name="categoria" id="categoria" placeholder="Categoria" required>
                     <label for="prezzo"></label>
-                    <input type="number" name="prezzo" id="prezzo" placeholder="Prezzo">
+                    <input type="number" step="any" name="prezzo" id="prezzo" placeholder="Prezzo" required>
                     <button class="buttonCrea"type="submit">CREA</button>
                 </div>
             </form>
@@ -69,21 +77,34 @@
                 <th scope="col">Nome</th>
                 <th scope="col">Categoria</th>
                 <th scope="col">Costo</th>
+                <th scope="col">Quantità</th>
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                <td data-label="Nome">Visa - 3412</td>
-                <td data-label="Categoria">Auto</td>
-                <td data-label="Costo">$1,190</td>
-                <td><button><img class="icon" src="./imgs/svg/rubbish-bin-svgrepo-com.svg" alt="bin"></button></td>
-                </tr>
-                <tr>
-                <td scope="row" data-label="Nome">Visa - 6076</td>
-                <td data-label="Categoria">Svago</td>
-                <td data-label="Costo">$2,443</td>
-                <td><button><img class="icon" src="./imgs/svg/rubbish-bin-svgrepo-com.svg" alt="bin"></button></td>
-                </tr>
+                <?php
+                    include 'dbConnection.php';
+
+                    $sql = "SELECT * FROM Prodotto WHERE UserWishlist = '".$_SESSION['username']."'";
+
+                    $result = mysqli_query($conn, $sql);
+
+                    if(mysqli_num_rows($result) > 0){
+                        while($row = mysqli_fetch_assoc($result)){
+                            echo "
+                                <tr>
+                                <td data-label='Nome'>" . $row['Nome'] . "</td>
+                                <td data-label='Categoria'>" . $row['Categoria'] . "</td>
+                                <td data-label='Costo'>" . sprintf("%.2f", $row['Prezzo']) . " €</td>
+                                <td data-label='Quantità'>" . $row['Quantita'] . "</td>
+                                <form action='eliminaProdotto.php' method='post'>
+                                    <input type='hidden' name='nome' value='".$row['Nome']."'>
+                                    <td><button type='submit'><img class='icon' src='./imgs/svg/rubbish-bin-svgrepo-com.svg' alt='bin'></button></td>
+                                </form>
+                                </tr>
+                            ";
+                        }
+                    }
+                ?>
             </tbody>
         </table>
     </section>
