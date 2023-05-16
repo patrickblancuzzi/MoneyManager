@@ -514,3 +514,10 @@ nav .icon-burger .line {
   .buttonVai:active{
 	opacity: .5;
   }
+
+  .error{
+    color: red;
+    font-size: 1.5rem;
+    margin: 0;
+    padding: 0;
+  }
