@@ -31,7 +31,7 @@
                     </div>
                 </li>
                 <li class="itemList">
-                    <a href="#">
+                    <a href="wishlist.php">
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-bag-heart" viewBox="0 0 16 16">
                         <path fill-rule="evenodd" d="M10.5 3.5a2.5 2.5 0 0 0-5 0V4h5v-.5Zm1 0V4H15v10a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V4h3.5v-.5a3.5 3.5 0 1 1 7 0ZM14 14V5H2v9a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1ZM8 7.993c1.664-1.711 5.825 1.283 0 5.132-5.825-3.85-1.664-6.843 0-5.132Z"/>
                         </svg>   
@@ -64,6 +64,22 @@
             $result = mysqli_query($conn, $query);
 
             echo "<div class='containerCards'>";
+
+            if(isset($_GET["error"])){
+                if($_GET["error"] == 1){
+                    echo "<center><p class='error'> Errore nella creazione della carta, PAN già esistente</p></center>";
+                }
+                if($_GET["error"] == 2){
+                    echo "<center><p class='error'> Errore nella creazione della carta, CVV non valido</p></center>";
+                }
+                if($_GET["error"] == 3){
+                    echo "<center><p class='error'> Errore nella creazione della carta, PAN non valido</p></center>";
+                }
+                if($_GET["error"] == 4){
+                    echo "<center><p class='error'> Errore nella creazione della carta, Data di scadenza non valida</p></center>";
+                }
+            }
+
             if(mysqli_num_rows($result) > 0){
                 while($row = mysqli_fetch_assoc($result)){
                     echo "
@@ -96,7 +112,9 @@
                                 <a class='buttonVai' href=''>Vai alla carta</a>
                             </div>
                             <div class='buttonsCard'>
-                                <a class='buttonElimina' href=''>Elimina Carta</a>
+                                <form method='post' action='eliminaCarta.php?pan=" . $row["PAN"] . "'>
+                                    <input type='submit' value='Elimina Carta' class='buttonElimina'>
+                                </form>
                             </div>
                     </div>
                 ";
@@ -107,15 +125,15 @@
             <div class="cardNew" onclick="cambioContent()">
                 <button class="buttonNew" id="buttonNew" onclick="cambioContent()">+</button>
                 <div class="displayNone transition" id="formDivContent">
-                    <form class="formContent" action="">
+                    <form class="formContent" action="addCard.php" method="post">
                     <label for="nomeTitolare">Nome titolare:</label>
-                        <input type="text" name="nomeTitolare" id="nomeTitolare">
+                        <input type="text" name="nomeTitolare" id="nomeTitolare" required>
                         <label for="pan">Pan:</label>
-                        <input type="text" name="pan" id="pan">
+                        <input type="text" name="pan" id="pan" required>
                         <label for="dataScadenza">Data di Scadenza:</label>
-                        <input type="date" name="dataScadenza" id="dataScadenza">
+                        <input type="month" name="dataScadenza" id="dataScadenza" required>
                         <label for="cvv">CVV:</label>
-                        <input type="text" name="cvv" id="cvv">
+                        <input type="text" name="cvv" id="cvv" required>
                         <button type="submit" class="buttonVai">Crea</button>
                         <button class="buttonBack">Indietro</button>
                     </form>
@@ -124,11 +142,8 @@
         </div>
     </section>
 
-
-    <!-- Solo per la fase di test -->
-        <form action="logout.php" method="post">
-            <input type="submit" value="Logout">
-        </form>
+    <?php
+    ?>
 
     <script>
         let button = document.getElementById("buttonNew");
