@@ -10,6 +10,11 @@
     <link rel="stylesheet" href="./styles/styleProfilo.css">
 </head>
 <body>
+
+    <?php
+        session_start();
+    ?>
+
 <nav>
             <input id="nav-toggle" type="checkbox">
             <ul class="links">
@@ -57,11 +62,11 @@
                 <div class="firstLn">
                 <div class="username">
                     <h2>Username:</h2>
-                    <p>Username Da inserire</p>
+                    <p><?php echo $_SESSION['username'] ?></p>
                 </div>
                 <div class="email">
                     <h2>Email:</h2>
-                    <p>UsernEmailame Da inserire</p>
+                    <p><?php echo $_SESSION['email'] ?></p>
                 </div>
                 </div>
                 
@@ -69,7 +74,9 @@
                     <h2>Password:</h2>
                     <p>Password Da inserire</p>
                 </div>
-                <button class="buttonBack">Esci</button>
+                <form action="logout.php" method="post">
+                    <input type="submit" value="Logout" class="buttonBack" value="Esci">
+                </form>                
             </div>
         </div>
     </section>
