@@ -1,3 +1,14 @@
+<?php
+    if($_SERVER["REQUEST_METHOD"] != "POST"){
+        header("Location: index.php");
+    }
+
+    session_start();
+    if(!isset($_SESSION['username'])){
+        header("Location: Login.php");
+    }
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,6 +19,7 @@
     <link rel="stylesheet" href="./styles/styleCard.css">
     <link rel="icon" type="image/x-icon" href="./imgs/svg/logo-no-background.svg">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">    
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
 <nav>
@@ -48,20 +60,46 @@
     </nav>
     <section class="relativeSection">
         <div class="contentGrafico">
-            mettere il grafico
+        <canvas id="grafico"></canvas>
         </div>
+
+        <?php
+            include "dbConnection.php";
+
+            $saldoCorrente = 0;
+            $speseTotali = 0;
+            $entrateTotali = 0;
+
+            $pan = $_POST['pan'];
+
+            $sql = "SELECT * FROM Statistica WHERE Carta = '$pan'";
+
+            $result = $conn->query($sql);
+
+            if($result->num_rows > 0){
+                while($row = $result->fetch_assoc()){
+                    $speseTotali += $row['Uscita'];
+                    $entrateTotali += $row['Entrata'];
+                }
+            }
+
+            $saldoCorrente = $entrateTotali - $speseTotali;
+            
+            $nomeCarta = substr($pan, -4); 
+        ?>
+
         <div class="statistiche">
             <div class="itemStatistiche">
                 <h2>Saldo Corrente: </h2>
-                <p>saldo</p>
+                <p><?php echo sprintf("%.2f", $saldoCorrente) ?> €</p>
             </div>
             <div class="itemStatistiche">
                 <h2>Spese totali: </h2>
-                <p>saldo</p>
+                <p id="spese"><?php echo sprintf("%.2f", $speseTotali) ?> €</p>
             </div>
             <div class="itemStatistiche">
                 <h2>Entrate totali </h2>
-                <p>saldo</p>
+                <p id="guadagno"><?php echo sprintf("%.2f", $entrateTotali) ?> €</p>
             </div>
         </div>
     </section>
@@ -70,26 +108,66 @@
             <thead>
                 <tr>
                 <th scope="col">Nome</th>
-                <th scope="col">Categoria</th>
-                <th scope="col">Costo</th>
+                <th scope="col">Entrata</th>
+                <th scope="col">Uscita</th>
                 <th scope="col">Data</th>
                 </tr>
             </thead>
             <tbody>
                 <tr>
-                <td data-label="Nome">Visa - 3412</td>
-                <td data-label="Categoria">Auto</td>
-                <td data-label="Costo">$1,190</td>
-                <td data-label="Giorno">03/01/2016</td>
-                </tr>
-                <tr>
-                <td scope="row" data-label="Nome">Visa - 6076</td>
-                <td data-label="Categoria">Svago</td>
-                <td data-label="Costo">$2,443</td>
-                <td data-label="Giorno">02/01/2016</td>
-                </tr>
+                    <?php
+                        $sql = "SELECT * FROM Statistica WHERE Carta = '$pan'";
+
+                        $result = $conn->query($sql);
+
+                        if($result->num_rows > 0){
+                            while($row = $result->fetch_assoc()){
+                                echo "
+                                <td data-label='Nome'>Visa - " . $nomeCarta . "</td>
+                                <td data-label='Entrata'>" . sprintf("%.2f", $row["Entrata"]) . " €</td>
+                                <td data-label='Uscita'>" . sprintf("%.2f", $row["Uscita"]) . " €</td>
+                                <td data-label='Giorno'>" . $row["Data"] . "</td>
+                                </tr>
+                                ";
+                            }
+                        }
+                    ?>
             </tbody>
         </table>
     </section>
+
+    <script>
+        //window.addEventListener('load', function(){
+        // Dati di esempio
+        var guadagno = document.getElementById("guadagno").innerHTML;
+        var spese = document.getElementById("spese").innerHTML;
+
+        guadagno = parseInt(guadagno.replace(" €", ""));
+        spese = parseInt(spese.replace(" €", ""));
+
+        // Calcola la percentuale di guadagno e spese
+        var percentualeGuadagno = (guadagno / (guadagno + spese)) * 100;
+        var percentualeSpese = (spese / (guadagno + spese)) * 100;
+
+        // Configurazione del grafico
+        var config = {
+            type: 'pie',
+            data: {
+                labels: ['Guadagno', 'Spese'],
+                datasets: [{
+                    data: [percentualeGuadagno, percentualeSpese],
+                    backgroundColor: ['green', 'red']
+                }]
+            },
+            options: {
+                responsive: true
+            }
+        };
+
+        // Creazione del grafico
+        var ctx = document.getElementById('grafico').getContext('2d');
+        new Chart(ctx, config);
+        //})
+    </script>
 </body>
 </html>
