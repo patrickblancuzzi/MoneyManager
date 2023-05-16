@@ -47,6 +47,7 @@
                 session_start();
 
                 $_SESSION["username"] = $usernameForm;
+                $_SESSION["email"] = $row["Email"];
 
                 header("Location: ../index.php");
                 exit();
