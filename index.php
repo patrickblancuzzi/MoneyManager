@@ -135,8 +135,8 @@
                         <label for="cvv">CVV:</label>
                         <input type="text" name="cvv" id="cvv" required>
                         <button type="submit" class="buttonVai">Crea</button>
-                        <button class="buttonBack">Indietro</button>
                     </form>
+                        <button class="buttonBack">Indietro</button>
                 </div>
             </div>
         </div>
