@@ -46,5 +46,46 @@
             <div class="line"></div>
         </label>
     </nav>
+    <section class="relativeSection">
+        <div class="contentForm">
+            <form class="formWish" action="">
+                <h2>Aggiungi prodotto:</h2>
+                <div class="content">
+                    <label for="name"></label>
+                    <input type="text" name="name" id="name" placeholder="Nome">
+                    <label for="categoria"></label>
+                    <input type="text" name="categoria" id="categoria" placeholder="Categoria">
+                    <label for="prezzo"></label>
+                    <input type="number" name="prezzo" id="prezzo" placeholder="Prezzo">
+                    <button class="buttonCrea"type="submit">CREA</button>
+                </div>
+            </form>
+        </div>
+    </section>
+    <section class="relativeSection">
+        <table>
+            <thead>
+                <tr>
+                <th scope="col">Nome</th>
+                <th scope="col">Categoria</th>
+                <th scope="col">Costo</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                <td data-label="Nome">Visa - 3412</td>
+                <td data-label="Categoria">Auto</td>
+                <td data-label="Costo">$1,190</td>
+                <td><button><img class="icon" src="./imgs/svg/rubbish-bin-svgrepo-com.svg" alt="bin"></button></td>
+                </tr>
+                <tr>
+                <td scope="row" data-label="Nome">Visa - 6076</td>
+                <td data-label="Categoria">Svago</td>
+                <td data-label="Costo">$2,443</td>
+                <td><button><img class="icon" src="./imgs/svg/rubbish-bin-svgrepo-com.svg" alt="bin"></button></td>
+                </tr>
+            </tbody>
+        </table>
+    </section>
     </body>
 </html>
