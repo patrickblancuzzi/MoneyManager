@@ -109,7 +109,10 @@
                         </div>
                         <div class='buttons'>
                             <div class='buttonsCard'>
-                                <a class='buttonVai' href=''>Vai alla carta</a>
+                                <form method='post' action='carta.php'>
+                                <input type='hidden' name='pan' value='" . $row["PAN"] . "'>
+                                <input class='buttonVai' type='submit' value='Vai alla carta'>
+                            </form>
                             </div>
                             <div class='buttonsCard'>
                                 <form method='post' action='eliminaCarta.php?pan=" . $row["PAN"] . "'>
