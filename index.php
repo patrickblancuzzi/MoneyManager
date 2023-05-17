@@ -15,6 +15,7 @@
     <link rel="stylesheet" href="./styles/panoramica.css">
     <link rel="icon" type="image/x-icon" href="./imgs/svg/logo-no-background.svg">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">    
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
         <nav>
@@ -55,6 +56,45 @@
     </nav>
 
     <section class="relativeSection">
+        <canvas id="grafico"></canvas>
+
+        <?php
+            include "dbConnection.php";
+
+            $saldoCorrente = 0;
+            $speseTotali = 0;
+            $entrateTotali = 0;
+
+            $sql = "SELECT *
+            FROM Carta JOIN Statistica ON Carta.PAN = Statistica.Carta
+            WHERE Carta.User = '" . $_SESSION['username'] . "'";    
+
+            $result = mysqli_query($conn, $sql);
+
+            if (mysqli_num_rows($result) > 0) {
+                while ($row = mysqli_fetch_assoc($result)) {
+                    $speseTotali += $row['Uscita'];
+                    $entrateTotali += $row['Entrata'];
+                }
+            }
+            $saldoCorrente = $entrateTotali - $speseTotali;
+        ?>
+
+        <div class="statistiche">
+            <div class="itemStatistiche">
+                <h2>Saldo Corrente: </h2>
+                <p><?php echo sprintf("%.2f", $saldoCorrente) ?> €</p>
+            </div>
+            <div class="itemStatistiche">
+                <h2>Spese totali: </h2>
+                <p id="spese"><?php echo sprintf("%.2f", $speseTotali) ?> €</p>
+            </div>
+            <div class="itemStatistiche">
+                <h2>Entrate totali: </h2>
+                <p id="guadagno"><?php echo sprintf("%.2f", $entrateTotali) ?> €</p>
+            </div>
+        </div>
+
         <?php
             include "dbConnection.php";
 
@@ -157,6 +197,37 @@
             button.classList.add("displayNone");
         }
 
+        //window.addEventListener('load', function(){
+        // Dati di esempio
+        var guadagno = document.getElementById("guadagno").innerHTML;
+        var spese = document.getElementById("spese").innerHTML;
+
+        guadagno = parseInt(guadagno.replace(" €", ""));
+        spese = parseInt(spese.replace(" €", ""));
+
+        // Calcola la percentuale di guadagno e spese
+        var percentualeGuadagno = (guadagno / (guadagno + spese)) * 100;
+        var percentualeSpese = (spese / (guadagno + spese)) * 100;
+
+        // Configurazione del grafico
+        var config = {
+            type: 'pie',
+            data: {
+                labels: ['Guadagno', 'Spese'],
+                datasets: [{
+                    data: [percentualeGuadagno, percentualeSpese],
+                    backgroundColor: ['green', 'red']
+                }]
+            },
+            options: {
+                responsive: true
+            }
+        };
+
+        // Creazione del grafico
+        var ctx = document.getElementById('grafico').getContext('2d');
+        new Chart(ctx, config);
+        //})
     </script>
 </body>
 </html>
