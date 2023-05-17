@@ -36,7 +36,7 @@
             exit();
         }
         
-        if(strlen($passwordForm) < 8){
+        if(strlen($passwordForm) < 10){
             header("Location: ../SingUp.php?error=4");
             exit();
         }
