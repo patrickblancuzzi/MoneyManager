@@ -60,7 +60,7 @@
     </nav>
     <section class="relativeSection">
         <div class="contentGrafico">
-        <canvas class="grafico" id="grafico"></canvas>
+        <canvas id="grafico"></canvas>
         </div>
 
         <?php
@@ -84,7 +84,7 @@
             }
 
             $saldoCorrente = $entrateTotali - $speseTotali;
-            
+
             $nomeCarta = substr($pan, -4); 
         ?>
 
@@ -106,15 +106,16 @@
 
     <section class="relativeSection">
         <div class="contentForm">
-            <form class="formWish" action="aggiungiProdotto.php" method="post">
-                <h2>Aggiungi transazione:</h2>
+            <form class="formWish" action="aggiungiStatistica.php" method="post">
+                <h2>Aggiungi entrata:</h2>
                 <div class="content">
                     <label for="prezzo"></label>
-                    <input type="number" step="any" name="entrata" id="entrata" placeholder="Entrata" required>
+                    <input type="number" step="any" name="entrata" id="entrata" placeholder="Entrata">
                     <label for="prezzo"></label>
-                    <input type="number" step="any" name="uscita" id="uscita" placeholder="Uscita" required>
+                    <input type="number" step="any" name="uscita" id="uscita" placeholder="Uscita">
                     <label for="data"></label>
                     <input type="date" name="data" id="data" placeholder="Data" required>
+                    <input type="hidden" name="pan" value="<?php echo $pan ?>">
                     <button class="buttonCrea"type="submit">CREA</button>
                 </div>
             </form>
@@ -145,7 +146,6 @@
                                 <td data-label='Entrata'>" . sprintf("%.2f", $row["Entrata"]) . " €</td>
                                 <td data-label='Uscita'>" . sprintf("%.2f", $row["Uscita"]) . " €</td>
                                 <td data-label='Giorno'>" . $row["Data"] . "</td>
-                                <td><button type='submit'><img class='icon' src='./imgs/svg/rubbish-bin-svgrepo-com.svg' alt='bin'></button></td>
                                 </tr>
                                 ";
                             }
