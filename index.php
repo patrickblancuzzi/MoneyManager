@@ -55,30 +55,32 @@
         </label>
     </nav>
 
-    <section class="relativeSection">
-        <canvas id="grafico"></canvas>
+    <section class="relativeSectionFirst">
+        <div class="contentGrafico">
+            <canvas class="grafico" id="grafico"></canvas>
 
-        <?php
-            include "dbConnection.php";
+            <?php
+                include "dbConnection.php";
 
-            $saldoCorrente = 0;
-            $speseTotali = 0;
-            $entrateTotali = 0;
+                $saldoCorrente = 0;
+                $speseTotali = 0;
+                $entrateTotali = 0;
 
-            $sql = "SELECT *
-            FROM Carta JOIN Statistica ON Carta.PAN = Statistica.Carta
-            WHERE Carta.User = '" . $_SESSION['username'] . "'";    
+                $sql = "SELECT *
+                FROM Carta JOIN Statistica ON Carta.PAN = Statistica.Carta
+                WHERE Carta.User = '" . $_SESSION['username'] . "'";    
 
-            $result = mysqli_query($conn, $sql);
+                $result = mysqli_query($conn, $sql);
 
-            if (mysqli_num_rows($result) > 0) {
-                while ($row = mysqli_fetch_assoc($result)) {
-                    $speseTotali += $row['Uscita'];
-                    $entrateTotali += $row['Entrata'];
+                if (mysqli_num_rows($result) > 0) {
+                    while ($row = mysqli_fetch_assoc($result)) {
+                        $speseTotali += $row['Uscita'];
+                        $entrateTotali += $row['Entrata'];
+                    }
                 }
-            }
-            $saldoCorrente = $entrateTotali - $speseTotali;
-        ?>
+                $saldoCorrente = $entrateTotali - $speseTotali;
+            ?> 
+        </div>
 
         <div class="statistiche">
             <div class="itemStatistiche">
@@ -94,8 +96,10 @@
                 <p id="guadagno"><?php echo sprintf("%.2f", $entrateTotali) ?> €</p>
             </div>
         </div>
+    </section>
 
-        <?php
+    <section class="relativeSection">
+    <?php
             include "dbConnection.php";
 
             $username = mysqli_real_escape_string($conn, $_SESSION["username"]);
@@ -126,7 +130,7 @@
                     <div class='containerCards'>
                         <div class='card'>
                             <div class='card__front card__part'>
-                                <img class='card__front-square card__square' src='../imgs/png/PayPal-Logo.png'>
+                                <img class='card__front-square card__square' src='./imgs/png/PayPal-Logo.png'>
                                 <p class='card_numer'>" . chunk_split($row["PAN"], 4, " ") . "</p>
                                 <div class='card__space-75'>
                                 <span class='card__label'>Titolare:</span>
@@ -143,7 +147,7 @@
                                 <div class='card__secret'>
                                     <p class='card__secret--last'>" . $row["CVV"] . "</p>
                                 </div>
-                                <img class='card__back-square card__square' src='../imgs/png/PayPal-Logo.png'>
+                                <img class='card__back-square card__square' src='./imgs/png/PayPal-Logo.png'>
                                 </div>
                             </div>
                         </div>
