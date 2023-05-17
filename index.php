@@ -172,7 +172,7 @@
             <div class="cardNew" onclick="cambioContent()">
                 <button class="buttonNew" id="buttonNew" onclick="cambioContent()">+</button>
                 <div class="displayNone transition" id="formDivContent">
-                    <form class="formContent" action="addCard.php" method="post">
+                    <form class="formContent" id="cardNew" action="addCard.php" method="post">
                     <label for="nomeTitolare">Nome titolare:</label>
                         <input type="text" name="nomeTitolare" id="nomeTitolare" required>
                         <label for="pan">Pan:</label>
@@ -183,7 +183,7 @@
                         <input type="text" name="cvv" id="cvv" required>
                         <button type="submit" class="buttonVai">Crea</button>
                     </form>
-                        <button class="buttonBack">Indietro</button>
+                        <button class="buttonBack" onclick="cambioContentBack()" id="buttonBack">Indietro</button>
                 </div>
             </div>
         </div>
@@ -194,11 +194,18 @@
 
     <script>
         let button = document.getElementById("buttonNew");
+        let card = document.getElementById("cardNew");
+        let button2 = document.getElementById("buttonBack")
         let form = document.getElementById("formDivContent");
 
         function cambioContent(){
-            form.classList.remove("displayNone");
             button.classList.add("displayNone");
+            form.classList.remove("displayNone")
+        }
+
+        function cambioContentBack(){
+            button.classList.remove("displayNone");
+            form.classList.add("displayNone")
         }
 
         //window.addEventListener('load', function(){
