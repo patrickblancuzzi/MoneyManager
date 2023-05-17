@@ -128,6 +128,17 @@ nav .icon-burger .line {
 	}
 }
 
+.active::before{
+	content: "";
+	position: absolute;
+	z-index: -1;
+	width: 50%!important;
+	height: 1%;
+	background-color: #fff;
+	top: 80%;
+}
+
+
 input{
 	border: none;
     width: 100%;

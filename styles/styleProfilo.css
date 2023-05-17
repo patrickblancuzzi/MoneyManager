@@ -6,6 +6,16 @@
     /* overflow-y: hidden; */
 }
 
+.active::before{
+	content: "";
+	position: absolute;
+	z-index: -1;
+	width: 50%!important;
+	height: 1%;
+	background-color: #fff;
+	top: 80%;
+}
+
 body{
     background-color: #F6FFDE;
 }
