@@ -69,11 +69,6 @@
                     <p><?php echo $_SESSION['email'] ?></p>
                 </div>
                 </div>
-                
-                <div class="password">
-                    <h2>Password:</h2>
-                    <p>Password Da inserire</p>
-                </div>
                 <form action="logout.php" method="post" class="formClass">
                     <input type="submit" value="Logout" class="buttonBack" value="Esci">
                 </form>                
