@@ -92,6 +92,15 @@ nav .icon-burger .line {
 		transition: all .5s ease-in-out;
 	}
 
+	.relativeSectionFirst{
+		flex-direction: column!important;
+	}
+
+	.statistiche{
+		padding: 0;
+		margin-top: 2rem;
+	}
+
 	nav{
 		background-color: rgb(37, 141, 37);
 	}
@@ -120,9 +129,43 @@ nav .icon-burger .line {
 	}
 }
 
-.relatvieSection{
+.contentGrafico{
+	display: flex;
+}
+
+.statistiche{
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	padding-left: 1.5em;
+}
+
+.itemStatistiche{
+	display: flex;
+	width: 100%;
+	flex-direction: column;
+}
+
+.grafico{
+	width: 400px!important;
+	height: 400px!important;
+}
+
+.relativeSection{
 	position: relative;
 	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.relativeSectionFirst{
+	position: relative;
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	padding: 3em;
+	justify-content: center;
 }
 
 .containerCards{
@@ -518,6 +561,6 @@ nav .icon-burger .line {
   .error{
     color: red;
     font-size: 1.5rem;
-    margin: 0;
+    margin: 0 auto;
     padding: 0;
   }
