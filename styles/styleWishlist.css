@@ -5,6 +5,10 @@
     margin: 0;
 }
 
+body{
+	background-color: #F6FFDE!important;
+}
+
 nav {
 	position: relative;
 	z-index: 10;
@@ -76,6 +80,10 @@ nav .icon-burger .line {
 }
 
 @media screen and (max-width: 768px) {
+	.content {
+		flex-direction: column!important;
+	}
+	
 	nav .links {
 		float: none;
 		position: fixed;
@@ -120,10 +128,20 @@ nav .icon-burger .line {
 	}
 }
 
+input{
+	border: none;
+    width: 100%;
+    padding: 12px 14px;
+    border-radius: 6px;
+}
+
 .relativeSection{
+	position: relative;
     display: flex;
     flex-direction: row;
-    padding: 3rem;
+    align-items: center;
+    padding: 3em;
+    justify-content: center;
 }
 
 table{
@@ -258,8 +276,16 @@ input{
 
 
 .content{
-	display: flex;
-	flex-direction: row;
-	flex-wrap: wrap;
-	gap: 1em;
+	display: flex!important;
+    flex-direction: row;
+    align-items: center!important;
+    justify-content: center!important;
+    gap: 0.3em;
+}
+
+.formWish{
+	text-align: center;
+    display: flex;
+    flex-direction: column;
+    gap: 0.3em!important;
 }

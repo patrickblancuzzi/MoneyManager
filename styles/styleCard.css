@@ -5,10 +5,42 @@
     margin: 0;
 }
 
+body{
+	background-color: #F6FFDE!important;
+}
+
 .relativeSection{
+    position: relative;
     display: flex;
     flex-direction: row;
-    padding: 3rem;
+    align-items: center;
+    padding: 3em;
+    justify-content: center;
+}
+
+.grafico {
+    width: 400px!important;
+    height: 400px!important;
+}
+
+.itemStatistiche{
+	display: flex;
+    width: 100%;
+    flex-direction: column;
+    background-color: #C7E9B0;
+    border: 3px solid #B3C99C;
+    border-radius: 8px;
+    padding: 2em;
+}
+
+.statistiche{
+	display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding-left: 1.5em;
+    padding: 1em;
+    gap: 0.5em;
 }
 
 nav {
@@ -124,15 +156,45 @@ nav .icon-burger .line {
 	nav :checked ~ .icon-burger .line:nth-child(3) {
 		transform: translateY(-10px) rotate(-225deg);
 	}
+
+	.relativeSection{
+		flex-direction: column!important;
+	}
+
+	.statistiche{
+		padding: 0;
+		margin-top: 2rem;
+	}
+
+	.content{
+		flex-direction: column!important;
+	}
+}
+
+.icon{
+	height: 1rem;
+}
+
+input{
+	border: none;
+	width: 100%;
+    padding: 12px 14px;
+    border-radius: 6px;
 }
 
 table{
+	background-color: rgb(248,248,248);
     border: 1px solid rgb(37, 141, 37);
     border-collapse: collapse;
     margin: 0;
     padding: 0;
     width: 100%;
     table-layout: fixed;
+}
+
+td button{
+	border: none;
+    background-color: rgb(248,248,248);
 }
   
 table caption{
@@ -203,5 +265,54 @@ table th{
     }
 }
   
+.buttonCrea{
+	background: rgb(37, 141, 37);
+	border: 1px solid rgb(37, 141, 37);
+	border-radius: 6px;
+	box-shadow: rgba(0, 0, 0, 0.1) 1px 2px 4px;
+	box-sizing: border-box;
+	color: #FFFFFF;
+	cursor: pointer;
+	display: inline-block;
+	font-family: nunito,roboto,proxima-nova,"proxima nova",sans-serif;
+	font-size: 16px;
+	font-weight: 800;
+	line-height: 16px;
+	min-height: 40px;
+	outline: 0;
+	padding: 12px 14px;
+	text-align: center;
+	text-rendering: geometricprecision;
+	text-transform: none;
+	user-select: none;
+	-webkit-user-select: none;
+	touch-action: manipulation;
+	vertical-align: middle;
+}
   
+.buttonCrea:hover,
+.buttonCrea:active{
+	background-color: initial;
+	background-position: 0 0;
+	color: rgb(37, 141, 37);
+}
   
+.buttonCrea:active{
+	opacity: .5;
+}
+  
+
+.formWish{
+	text-align: center;
+    display: flex;
+    flex-direction: column;
+	gap: .3em!important;
+}
+
+.content{
+	display: flex!important;
+	flex-direction: row;
+	align-items: center!important;
+	justify-content: center!important;
+	gap: .3em;
+}
