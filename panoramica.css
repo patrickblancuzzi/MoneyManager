@@ -137,13 +137,22 @@ nav .icon-burger .line {
 	display: flex;
 }
 
+.active::before{
+	content: "";
+	position: absolute;
+	z-index: -1;
+	width: 50%!important;
+	height: 1%;
+	background-color: #fff;
+	top: 80%;
+}
+
 .statistiche{
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
 	padding-left: 1.5em;
-	width: 40%;
 	padding: 1em;
 	gap: .5em;
 }
@@ -238,9 +247,9 @@ nav .icon-burger .line {
 	-webkit-perspective: 600px;
 	-moz-perspective: 600px;
 	perspective:600px;
-	border: 1px solid black!important;
+	background-color: #C7E9B0;
+    border: 3px solid #B3C99C!important;
 	border-radius: 8px;
-	background-color: rgb(236, 234, 234);
 }
 
 /* .cardNew::before{
@@ -449,7 +458,7 @@ nav .icon-burger .line {
 	border: 0;
 	border-radius: 50%;
 	font-size: 30px;
-	background-color: rgb(236, 234, 234);
+	background-color: #C7E9B0;
 	transform-origin: center;
 }
 
@@ -459,6 +468,16 @@ nav .icon-burger .line {
 
 .transition{
 	transition: 1s;
+}
+
+input{
+	border: none;
+	padding: 12px 14px;
+	border-radius: 6px;
+}
+
+label{
+	padding: .3rem;
 }
 
 .displayNone{

@@ -6,8 +6,18 @@
     /* overflow-y: hidden; */
 }
 
+.active::before{
+	content: "";
+	position: absolute;
+	z-index: -1;
+	width: 50%!important;
+	height: 1%;
+	background-color: #fff;
+	top: 80%;
+}
+
 body{
-    background-color: rgb(153, 205, 153);
+    background-color: #F6FFDE;
 }
 
 nav {
@@ -80,6 +90,12 @@ nav .icon-burger .line {
 }
 
 @media screen and (max-width: 768px) {
+
+    .firstLn {
+        display: flex;
+        flex-direction: column!important;
+    }
+
 	nav .links {
 		float: none;
 		position: fixed;
@@ -137,7 +153,7 @@ nav .icon-burger .line {
     align-items: flex-end;
     width: 100%;
     padding-top: 1.5rem;
-    background-color: rgb(85, 230, 85);
+    background-color: #C9DBB2;
     border-bottom: solid 15px white;
 }
 
@@ -147,7 +163,7 @@ nav .icon-burger .line {
     padding: 3.5rem;
     width: 100%;
     justify-content: center;
-    background-color: rgb(153, 205, 153);
+    background-color: #F6FFDE;
 }
 
 .content{
@@ -155,14 +171,18 @@ nav .icon-burger .line {
     flex-direction: column;
 }
 
-.username, .email, .password{
+.username, .email {
     display: flex;
     flex-direction: column;
     align-items: center;
     padding: 1rem;
+    background-color: #C7E9B0;
+    border: 3px solid #B3C99C;
+    border-radius: 8px;
+    padding: 2em;
 }
 
-.username p, .email p, .password p{
+.username p, .email p{
     margin:0;
 }
 
@@ -222,13 +242,6 @@ nav .icon-burger .line {
     flex-direction: row;
     gap: 2em;
   }
-
-@media screen and (max-width: 450px) {
-    .firstLn{
-        display: flex;
-        flex-direction: column;
-      }
-}
 
 .formClass{
     display: flex;

@@ -1,0 +1,318 @@
+*{
+    margin: 0;
+    padding: 0;
+    padding: 0;
+    margin: 0;
+}
+
+body{
+	background-color: #F6FFDE!important;
+}
+
+.relativeSection{
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 3em;
+    justify-content: center;
+}
+
+.grafico {
+    width: 400px!important;
+    height: 400px!important;
+}
+
+.itemStatistiche{
+	display: flex;
+    width: 100%;
+    flex-direction: column;
+    background-color: #C7E9B0;
+    border: 3px solid #B3C99C;
+    border-radius: 8px;
+    padding: 2em;
+}
+
+.statistiche{
+	display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding-left: 1.5em;
+    padding: 1em;
+    gap: 0.5em;
+}
+
+nav {
+	position: relative;
+	z-index: 10;
+	padding: 0 5%;
+	height: 15vh;
+	text-transform: uppercase;
+    background-color: rgb(37, 141, 37);
+	box-shadow: 0px 5px 10px 0px #aaa;
+}
+
+nav .links {
+	padding: 0;
+	margin: 0;
+	height: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+nav .links li {
+	list-style: none;
+}
+nav .links a {
+	display: block;
+	position: relative;
+	padding: 1em;
+	font-size: 20px;
+	font-weight: bold;
+	color: #fff;
+	text-decoration: none;
+    transition: 1s;
+	z-index: 0;
+}
+
+nav .links a::before{
+	content: "";
+	position: absolute;
+	z-index: -1;
+	width: 0%;
+	height: 1%;
+	background-color: #fff;
+	top: 80%;
+	transition: 1s;
+}
+
+nav .links a:hover::before{
+	width: 90%;
+}
+
+#nav-toggle {
+	position: absolute;
+	top: -100px;
+}
+
+nav .icon-burger {
+	display: none;
+	position: absolute;
+	right: 5%;
+	top: 50%;
+	transform: translateY(-50%);
+}
+
+nav .icon-burger .line {
+	width: 30px;
+	height: 5px;
+	background-color: #fff;
+	margin: 5px;
+	border-radius: 3px;
+	transition: all 0.3s ease-in-out;
+}
+
+@media screen and (max-width: 768px) {
+	nav .links {
+		float: none;
+		position: fixed;
+		z-index: 9;
+		left: 0;
+		right: 0;
+		top: 100px;
+		bottom: 100%;
+		width: auto;
+		height: auto;
+		flex-direction: column;
+		background-color: rgb(37, 141, 37);
+		overflow: hidden;
+		transition: all .5s ease-in-out;
+	}
+
+	nav{
+		background-color: rgb(37, 141, 37);
+	}
+	nav .links a {
+		font-size: 20px;
+	}
+
+    /* ~ tutti i .links che sono sullo stesso livello*/
+
+	nav :checked ~ .links {
+		bottom: 0;
+	}
+	nav .icon-burger {
+		display: block;
+	}
+	nav :checked ~ .icon-burger .line:nth-child(1) {
+		transform: translateY(10px) rotate(225deg);
+	}
+
+    nav :checked ~ .icon-burger .line:nth-child(2) {
+		opacity: 0;
+	}
+
+	nav :checked ~ .icon-burger .line:nth-child(3) {
+		transform: translateY(-10px) rotate(-225deg);
+	}
+
+	.relativeSection{
+		flex-direction: column!important;
+	}
+
+	.statistiche{
+		padding: 0;
+		margin-top: 2rem;
+	}
+
+	.content{
+		flex-direction: column!important;
+	}
+}
+
+.icon{
+	height: 1rem;
+}
+
+input{
+	border: none;
+	width: 100%;
+    padding: 12px 14px;
+    border-radius: 6px;
+}
+
+table{
+	background-color: rgb(248,248,248);
+    border: 1px solid rgb(37, 141, 37);
+    border-collapse: collapse;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    table-layout: fixed;
+}
+
+td button{
+	border: none;
+    background-color: rgb(248,248,248);
+}
+  
+table caption{
+    font-size: 1.5em;
+    margin: .5em 0 .75em;
+}
+  
+table tr{
+    background-color: #f8f8f8;
+    border: 1px solid rgb(37, 141, 37);
+    padding: .35em;
+}
+  
+table th,
+table td{
+    padding: .625em;
+    text-align: center;
+}
+  
+table th{
+    font-size: .85em;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+}
+  
+@media screen and (max-width: 600px) {
+    table {
+      border: 0;
+    }
+  
+    table caption{
+      font-size: 1.3em;
+    }
+    
+    table thead{
+      border: none;
+      clip: rect(0 0 0 0);
+      height: 1px;
+      margin: -1px;
+      overflow: hidden;
+      padding: 0;
+      position: absolute;
+      width: 1px;
+    }
+    
+    table tr{
+      border-bottom: 3px solid #ddd;
+      display: block;
+      margin-bottom: .625em;
+    }
+    
+    table td{
+      border-bottom: 1px solid #ddd;
+      display: block;
+      font-size: .8em;
+      text-align: right;
+    }
+    
+    table td::before{
+      content: attr(data-label);
+      float: left;
+      font-weight: bold;
+      text-transform: uppercase;
+    }
+    
+    table td:last-child{
+      border-bottom: 0;
+    }
+}
+  
+.buttonCrea{
+	background: rgb(37, 141, 37);
+	border: 1px solid rgb(37, 141, 37);
+	border-radius: 6px;
+	box-shadow: rgba(0, 0, 0, 0.1) 1px 2px 4px;
+	box-sizing: border-box;
+	color: #FFFFFF;
+	cursor: pointer;
+	display: inline-block;
+	font-family: nunito,roboto,proxima-nova,"proxima nova",sans-serif;
+	font-size: 16px;
+	font-weight: 800;
+	line-height: 16px;
+	min-height: 40px;
+	outline: 0;
+	padding: 12px 14px;
+	text-align: center;
+	text-rendering: geometricprecision;
+	text-transform: none;
+	user-select: none;
+	-webkit-user-select: none;
+	touch-action: manipulation;
+	vertical-align: middle;
+}
+  
+.buttonCrea:hover,
+.buttonCrea:active{
+	background-color: initial;
+	background-position: 0 0;
+	color: rgb(37, 141, 37);
+}
+  
+.buttonCrea:active{
+	opacity: .5;
+}
+  
+
+.formWish{
+	text-align: center;
+    display: flex;
+    flex-direction: column;
+	gap: .3em!important;
+}
+
+.content{
+	display: flex!important;
+	flex-direction: row;
+	align-items: center!important;
+	justify-content: center!important;
+	gap: .3em;
+}
